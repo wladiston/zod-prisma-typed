@@ -12,6 +12,8 @@ type Post = {
   updatedAt: Date;
   test_string: string;
   test_string_optional: string | null;
+  test_enum: string;
+  test_enum_optional: string | null;
   test_bigint: bigint;
   test_bigint_optional: bigint | null;
   test_decimal: Decimal;
@@ -38,6 +40,9 @@ doNotExecute(() => {
   const schema = z.object<Schema<Post, HiddenFields>>({
     test_string: z.string(),
     test_string_optional: z.string().optional(),
+
+    test_enum: z.enum(["wqewqe", "wqqewqe"]),
+    test_enum_optional: z.string().optional(),
 
     test_boolean: z.boolean(),
     test_boolean_optional: z.boolean().optional(),
