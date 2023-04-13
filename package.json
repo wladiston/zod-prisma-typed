@@ -1,6 +1,6 @@
 {
   "name": "zod-prisma-utils",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Zod schema type validator for Prisma models",
   "private": false,
   "repository": "https://github.com/wladiston/zod-prisma-utils",
