@@ -26,9 +26,9 @@ type OptionalOperator<T extends z.ZodTypeAny> =
  */
 type ConvertSchemaTypes<T> = {
   [K in keyof T]: T[K] extends string
-    ? z.ZodString
+    ? z.ZodString | z.ZodEnum<[string]>
     : T[K] extends string | null
-    ? OptionalOperator<z.ZodString>
+    ? OptionalOperator<z.ZodString | z.ZodEnum<[string]>>
     : T[K] extends boolean
     ? z.ZodBoolean
     : T[K] extends boolean | null
