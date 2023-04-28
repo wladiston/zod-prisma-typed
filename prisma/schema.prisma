@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  name         String?
+  password     String
+  transactions Transaction[]
+}
+
+enum TransactionStatus {
+  CONFIRMING
+  CONFIRMED
+  CANCELED
+}
+
+model Transaction {
+  id                 String            @id @default(cuid())
+  address            String
+  amountReceived     BigInt            @default(0) /// In sats
+  canceledAt         DateTime?
+  cancellationReason String?
+  metadata           Json?
+  status             TransactionStatus @default(CONFIRMING)
+  user               User              @relation(fields: [userId], references: [id])
+  userId             Int
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+}
