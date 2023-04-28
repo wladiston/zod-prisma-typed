@@ -20,13 +20,13 @@ import type { Schema } from "zod-prisma-utils";
 
 type HiddenFields = "createdAt" | "updatedAt";
 
-export const UserSchema = z.object<Schema<User, HiddenFields>>({
+export const UserSchema = z.object({
   id: z.string().uuid(),
   email: z.string().max(255).email(),
   name: z.string().max(255).optional(),
   password: z.string(),
   someField: z.string().max(255).optional(),
-});
+} satisfies Schema<User, HiddenFields>);
 ```
 
 That's it! No need to generate anything, no need to write any code inside your Prisma schema. Just use the `Schema` type and you're good to go.
@@ -35,12 +35,12 @@ Since Prisma has a special way to handle `decimal` and `json` fields, we also pr
 
 ```ts
 import { z } from "zod";
+import type { Prisma } from "@prisma/client";
 
 import * as zpu from "zod-prisma-utils";
 
-export const TransactionSchema = z.object<Schema<Transaction>>({
-  id: z.string().uuid(),
+export const TransactionSchema = z.object({
   amount: zpu.decimal(),
-  details: zpu.json(),
-});
+  metadata: zpu.json(),
+} satisfies Schema<Prisma.TransactionCreateInput>);
 ```

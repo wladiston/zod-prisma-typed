@@ -2,7 +2,7 @@ import { doNotExecute, Equal, Expect } from "./utils";
 
 import { z } from "zod";
 import { Schema } from "../src/schema";
-import * as zw from "../src/types";
+import * as zpu from "../src/types";
 
 import type { Prisma, Transaction } from ".prisma/client";
 import { PrismaClient } from ".prisma/client";
@@ -33,7 +33,7 @@ doNotExecute(() => {
     cancellationReason: z.string().nullish(),
     userId: z.number(),
     status: z.enum(["CONFIRMING", "CONFIRMED", "CANCELED"]),
-    metadata: zw.json().optional(),
+    metadata: zpu.json().optional(),
   } satisfies Schema<Transaction, "id" | "createdAt" | "updatedAt">);
 
   const data = schema.parse({});
