@@ -2,25 +2,48 @@ import { Decimal } from "decimal.js";
 import { z } from "zod";
 import type { RawCreateParams } from "zod";
 
-const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
+const literalSchema = z.union([z.string(), z.number(), z.boolean()]);
+const nullableLiteralSchema = z.union([
+  z.string(),
+  z.number(),
+  z.boolean(),
+  z.null(),
+]);
 type Literal = z.infer<typeof literalSchema>;
-type Json = Literal | { [key: string]: Json } | Json[];
+type NullableLiteral = z.infer<typeof nullableLiteralSchema>;
+type Json = NullableLiteral | { [key: string]: Json } | Json[];
+type JsonInput = Literal | { [key: string]: Json } | Json[];
 
 /**
- * Validates a JSON
- * @returns zod schema for JSON type
+ * Workaround for using nullable literal types
+ * @param params
+ * @returns
  */
-export const json = (params?: RawCreateParams): z.ZodType<Json> =>
+const jsonNullable = (params?: RawCreateParams): z.ZodType<Json> =>
   z.lazy(
     () =>
       z.union(
         [
-          literalSchema,
+          nullableLiteralSchema,
           z.array(json(params), params),
           z.record(json(params), params),
         ],
         params,
       ),
+    params,
+  );
+
+/**
+ * Validates a JSON
+ * @returns zod schema for JSON type
+ */
+export const json = (params?: RawCreateParams): z.ZodType<JsonInput> =>
+  z.union(
+    [
+      literalSchema,
+      z.array(jsonNullable(params), params),
+      z.record(jsonNullable(params), params),
+    ],
     params,
   );
 
