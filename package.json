@@ -10,6 +10,7 @@
     "check-exports": "check-export-map",
     "lint": "tsc",
     "changeset": "changeset",
+    "prepare": "prisma generate",
     "release": "turbo run publish",
     "publish": "changeset publish"
   },
