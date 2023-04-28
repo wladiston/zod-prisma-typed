@@ -35,7 +35,7 @@ type TypeConvert<T> = T extends string
   : T extends Date
   ? z.ZodDate
   : T extends bigint
-  ? z.ZodBigInt
+  ? z.ZodBigInt | z.ZodNumber
   : T extends DecimalJsLike
   ? ReturnType<typeof decimal>
   : T extends JsonValue
