@@ -4,8 +4,8 @@ import { z } from "zod";
 import { Schema } from "../src/schema";
 import * as zpu from "../src/types";
 
-import type { Prisma, Transaction } from ".prisma/client";
-import { PrismaClient } from ".prisma/client";
+import type { Prisma, Transaction } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 

@@ -1,9 +1,6 @@
 lockfileVersion: '6.0'
 
 dependencies:
-  .prisma/client:
-    specifier: link:prisma/prisma-client
-    version: link:prisma/prisma-client
   decimal.js:
     specifier: ^10.0.0
     version: 10.4.3
