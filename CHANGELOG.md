@@ -1,5 +1,11 @@
 # zod-prisma-utils
 
+## 0.0.8
+
+### Patch Changes
+
+- dc836c9: Bump the version to publis the last fixes
+
 ## 0.0.7
 
 ### Patch Changes
