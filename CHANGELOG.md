@@ -1,5 +1,11 @@
 # zod-prisma-utils
 
+## 0.0.9
+
+### Patch Changes
+
+- 7afbd8a: Add .default() support
+
 ## 0.0.8
 
 ### Patch Changes
