@@ -28,7 +28,7 @@ doNotExecute(() => {
 doNotExecute(() => {
   const schema = z.object({
     address: z.string(),
-    amountReceived: z.bigint(),
+    amountReceived: z.bigint().default(5n),
     canceledAt: z.date().nullish(),
     cancellationReason: z.string().nullish(),
     userId: z.number(),
