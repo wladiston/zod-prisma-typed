@@ -45,7 +45,9 @@ type TypeConvert<T> = T extends string
 type Optional<T, T2 extends z.ZodType> = T extends null | undefined
   ? OptionalOperator<T2>
   : T2;
-type PrepareType<T> = Optional<T, TypeConvert<T>>;
+type PrepareType<T> =
+  | Optional<T, TypeConvert<T>>
+  | z.ZodDefault<TypeConvert<T>>;
 
 type ConvertSchemaTypes<T> = {
   [K in keyof T]: PrepareType<T[K]>;
